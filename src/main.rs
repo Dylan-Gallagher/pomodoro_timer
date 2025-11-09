@@ -1,5 +1,6 @@
 use std::{
     io::{Write, stdin, stdout},
+    process::Command,
     sync::{
         Arc,
         atomic::{AtomicBool, Ordering},
@@ -84,6 +85,11 @@ fn main() {
                 session_type_name,
                 session_count + 1
             );
+            Command::new("paplay")
+                .arg("/usr/share/sounds/freedesktop/stereo/complete.oga")
+                .spawn()
+                .unwrap();
+            print!("\x07");
             println!("Press 'p' to pause, 's' to skip, 'q' to quit.");
 
             while elapsed_time < session_duration {
